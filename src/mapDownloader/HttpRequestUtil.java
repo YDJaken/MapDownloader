@@ -22,14 +22,31 @@ public class HttpRequestUtil {
 	public static Detect401 postDownTerrain(String path, File file) {
 		URL url = null;
 		try {
+			System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
 			url = new URL(path);
 			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//			httpURLConnection.setRequestProperty("cookie", "CONSENT=YES+DE.zh-CN+V14+BX; 1P_JAR=2021-02-24-01; NID=210=BhF1MWXmfgRpe1LHKRp3pFjRrqQUVMwYdk1wOURHPD1wM4qvjnOpAxy2rwOm8CEUuXzAraTENEiS9vBFPE1MIW52HCk0SDXDfAN5YTGPfvg_WCGGWiftvPmF9P4G6LbazSxaItpcx_7pL6jcbalE5_oS_2OJzEsWjp9aWS5Vu0g");
+			httpURLConnection.setRequestProperty("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+			httpURLConnection.setRequestProperty("accept-encoding", "gzip, deflate, br");
+			httpURLConnection.setRequestProperty("accept-language", "zh-CN,zh;q=0.9");
+			httpURLConnection.setRequestProperty("sec-fetch-dest", "document");
+			httpURLConnection.setRequestProperty("sec-fetch-mode", "navigate");
+			httpURLConnection.setRequestProperty("sec-fetch-site", "none");
+			httpURLConnection.setRequestProperty("sec-fetch-user", "?1");
+			httpURLConnection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 QIHU 360EE");
+			httpURLConnection.setRequestProperty("upgrade-insecure-requests", "1");
+//			httpURLConnection.setRequestProperty("x-client-data", "CIa2yQEIorbJAQjBtskBCKmdygEIlqzKAQjHw8oBCPjHygEIpM3KAQjc1coBCN6IywEIp5zLAQjGnMsBCNWcywEI5JzLAQioncsB\r\n"
+//					+ "Decoded:\r\n"
+//					+ "message ClientVariations {\r\n"
+//					+ "  // Active client experiment variation IDs.\r\n"
+//					+ "  repeated int32 variation_id = [3300102, 3300130, 3300161, 3313321, 3315222, 3318215, 3318776, 3319460, 3320540, 3327070, 3329575, 3329606, 3329621, 3329636, 3329704];\r\n"
+//					+ "}");
 			httpURLConnection.setRequestMethod("GET");
-			httpURLConnection.setConnectTimeout(5000);
-			httpURLConnection.setReadTimeout(5000);
+			httpURLConnection.setConnectTimeout(0);
+			httpURLConnection.setReadTimeout(0);
 			httpURLConnection.setDoOutput(true);
 			httpURLConnection.setDoInput(true);
-			httpURLConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+			
 			if (httpURLConnection.getResponseCode() == 401) {
 				return new Detect401(401);
 			}

@@ -15,12 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DonloadServlet")
 public class DonloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected static final String DonloadbaseV = File.separator + "data" + File.separator + "DownLoad" + File.separator
-			+ "MapV" + File.separator;
-	protected static final String DonloadbaseB = File.separator + "data" + File.separator + "DownLoad" + File.separator
-			+ "Map" + File.separator;
-	protected static final String DonloadbaseM = File.separator + "data" + File.separator + "DownLoad" + File.separator
-			+ "MapM" + File.separator;
+	protected static final String DonloadbaseV = "F:\\" + "DownLoad" + File.separator + "MapV" + File.separator;
+	protected static final String DonloadbaseB = "F:\\" + "DownLoad" + File.separator + "Map" + File.separator;
+	protected static final String DonloadbaseM = "F:\\" + "DownLoad" + File.separator + "MapM" + File.separator;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

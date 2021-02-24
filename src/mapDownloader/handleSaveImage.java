@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sun.misc.BASE64Decoder;
+import java.util.Base64;
 
 /**
  * Servlet implementation class handleSaveImage
@@ -17,8 +17,7 @@ import sun.misc.BASE64Decoder;
 @WebServlet("/handleSaveImage")
 public class handleSaveImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected static final String saveBase = File.separator + "data" + File.separator + "DownLoad" + File.separator
-			+ "Image" + File.separator;
+	protected static final String saveBase = "F:\\" + "DownLoad" + File.separator + "Map" + File.separator;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,19 +31,19 @@ public class handleSaveImage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		BASE64Decoder decoder = new BASE64Decoder();
+		Base64.Decoder decoder = Base64.getDecoder();
 		String src = request.getParameter("src");
 		String image = request.getParameter("data");
 		if(image == null) image =(String) request.getAttribute("data");
 		if(image == null) image = request.getQueryString();
 		image = image.substring(image.indexOf(",")+1);
 		try {
-			byte[] b = decoder.decodeBuffer(image);
-			for(int i = 0;i<b.length;i++) {
-				if(b[i]<0) {
-					b[i] +=256;
-				}
-			}
+			byte[] b = decoder.decode(image);
+//			for(int i = 0;i<b.length;i++) {
+//				if(b[i]<0) {
+//					b[i] +=256;
+//				}
+//			}
 			File img = new File(saveBase+src);
 			if(!img.exists()) {	
 				img.getParentFile().mkdirs();
